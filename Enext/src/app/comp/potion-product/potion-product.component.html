@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="title">
+      <p>Potion's</p>
+    </div>
+    <div class="produtos">
+      <!-- Iterando sobre o array de poções -->
+      <div *ngFor="let potion of getPotionsArray()" class="box" (click)="openLightbox(potion)">
+        <div class="flex">
+          <img [src]="'potions/' + potion.image" [alt]="potion.name" class="potion-image">
+          <div class="produto-info">
+            <p>{{ potion.name }}</p>
+            <p>Valor: ${{ potion.price }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Lightbox -->
+    <div class="lightbox" *ngIf="selectedPotion" (click)="closeLightbox($event)">
+      <div class="lightbox-content" (click)="$event.stopPropagation()">
+        <img [src]="'potions/' + selectedPotion.image" [alt]="selectedPotion.name" class="lightbox-image">
+        <div class="lightbox-info">
+
+            <h2>{{ selectedPotion.name }}</h2>
+            <p><strong>Preço:</strong> ${{ selectedPotion.price }}</p>
+            <p><strong>Descrição:</strong> {{ selectedPotion.effect }}</p>
+            <ul>
+                <strong>Ingredientes:</strong>
+                <li *ngFor="let ingredient of selectedPotion.ingredients">{{ ingredient }}</li>
+            </ul>
+            <button class="close-btn" (click)="closeLightbox($event)">ADD TO CART</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
